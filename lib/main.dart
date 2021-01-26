@@ -1,3 +1,6 @@
+import 'package:dkatalis_assignment/screens/password_setup_screen.dart';
+import 'package:dkatalis_assignment/screens/personal_info_screen.dart';
+import 'package:dkatalis_assignment/screens/schedule_screen.dart';
 import 'package:dkatalis_assignment/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +19,11 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         WelcomeScreen.routeName: (_) => WelcomeScreen(),
+        PasswordSetupScreen.routeName: (_) => PasswordSetupScreen(),
+        PersonalInfoScreen.routeName: (_) => PersonalInfoScreen(),
+        ScheduleScreen.routeName: (_) => ScheduleScreen(),
       },
-      initialRoute: WelcomeScreen.routeName,
+      initialRoute: ScheduleScreen.routeName,
     );
   }
 }
