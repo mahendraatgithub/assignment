@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         PersonalInfoScreen.routeName: (_) => PersonalInfoScreen(),
         ScheduleScreen.routeName: (_) => ScheduleScreen(),
       },
-      initialRoute: ScheduleScreen.routeName,
+      initialRoute: WelcomeScreen.routeName,
     );
   }
 }

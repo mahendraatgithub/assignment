@@ -1,4 +1,6 @@
+import 'package:dkatalis_assignment/common/constants.dart';
 import 'package:dkatalis_assignment/common/strings.dart';
+import 'package:dkatalis_assignment/widgets/dk_stepper.dart';
 import 'package:dkatalis_assignment/widgets/drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -33,34 +35,41 @@ class _ScheduleScreenState extends State<ScheduleScreen> with TickerProviderStat
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 100,
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: DKStepper(
+                steps: STEPS,
+                currentStep: 2,
+              ),
             ),
-            AnimatedBuilder(
-              animation: _animationController,
-              builder: (context, child) {
-                return Container(
+            Container(
+              height: 60,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  return Container(
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.3),
+                      shape: CircleBorder(),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0 * _animationController.value),
+                      child: child,
+                    ),
+                  );
+                },
+                child: Container(
                   decoration: ShapeDecoration(
-                    color: Colors.white.withOpacity(0.3),
+                    color: Colors.white,
                     shape: CircleBorder(),
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0 * _animationController.value),
-                    child: child,
+                  child: IconButton(
+                    onPressed: () {
+                      _startAnimation();
+                    },
+                    color: Colors.blue,
+                    icon: Icon(Icons.calendar_today, size: 24),
                   ),
-                );
-              },
-              child: Container(
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    _startAnimation();
-                  },
-                  color: Colors.blue,
-                  icon: Icon(Icons.calendar_today, size: 24),
                 ),
               ),
             ),

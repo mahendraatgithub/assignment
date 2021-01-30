@@ -1,4 +1,6 @@
+import 'package:dkatalis_assignment/common/constants.dart';
 import 'package:dkatalis_assignment/common/strings.dart';
+import 'package:dkatalis_assignment/widgets/dk_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,8 +29,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 200,
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: DKStepper(
+                  steps: STEPS,
+                ),
               ),
               Text(
                 Strings.welcome_screen_heading1,
