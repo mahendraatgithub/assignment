@@ -18,4 +18,11 @@ abstract class Strings {
   static const String scheduleHeading = 'Schedule Video Call';
   static const String scheduleDesc =
       'Choose the date and time that you preferred. We will send a link via email to make a video call on the scheduled date and time';
+  static const String goal_hint = 'Goal for activation';
+  static const String income_hint = 'Monthly Income';
+  static const String expense_hint = 'Monthly expense';
+
+  static const String err_invalid_email = 'Invalid email.';
+
+  static const String screen_title = 'Create Account';
 }

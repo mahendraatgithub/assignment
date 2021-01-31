@@ -1,5 +1,11 @@
+import 'package:dkatalis_assignment/common/constants.dart';
 import 'package:dkatalis_assignment/common/strings.dart';
+import 'package:dkatalis_assignment/screens/personal_info_screen.dart';
 import 'package:dkatalis_assignment/utils/password_complexity_mixin.dart';
+import 'package:dkatalis_assignment/utils/validator.dart';
+import 'package:dkatalis_assignment/widgets/dk_app_bar.dart';
+import 'package:dkatalis_assignment/widgets/dk_button.dart';
+import 'package:dkatalis_assignment/widgets/dk_stepper.dart';
 import 'package:dkatalis_assignment/widgets/password_test_cases_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,7 +20,7 @@ class PasswordSetupScreen extends StatefulWidget {
 class _PasswordSetupScreenState extends State<PasswordSetupScreen> with PasswordComplexityChecker {
   final TextEditingController _passwordController = TextEditingController();
   String password;
-  bool _showPassword = true;
+  bool _showPassword = false;
 
   @override
   void dispose() {
@@ -22,21 +28,37 @@ class _PasswordSetupScreenState extends State<PasswordSetupScreen> with Password
     super.dispose();
   }
 
+  bool _isValidData() {
+    return !Validator.isNullOrEmpty(_passwordController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: DKAppBar(
+        title: Strings.screen_title,
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              DKStepper(
+                steps: STEPS,
+                currentStep: 0,
+              ),
               SizedBox(
-                height: 200,
+                height: 48,
               ),
               Text(
                 Strings.create_password,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
               SizedBox(
                 height: 12,
@@ -45,7 +67,7 @@ class _PasswordSetupScreenState extends State<PasswordSetupScreen> with Password
                 Strings.password_use_text,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(
@@ -57,7 +79,11 @@ class _PasswordSetupScreenState extends State<PasswordSetupScreen> with Password
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0),
+                    ),
+                  ),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -86,7 +112,7 @@ class _PasswordSetupScreenState extends State<PasswordSetupScreen> with Password
                     '${Strings.complexity}:',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                   Padding(
@@ -135,21 +161,14 @@ class _PasswordSetupScreenState extends State<PasswordSetupScreen> with Password
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: RaisedButton(
-          color: Theme.of(context).primaryColor,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              Strings.btn_next,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          onPressed: () {
-            print('Email: ${_passwordController.text}');
-          },
+        child: DKButton(
+          text: Strings.btn_next,
+          onClick: _isValidData()
+              ? () {
+                  print('Password: ${_passwordController.text}');
+                  Navigator.of(context).pushNamed(PersonalInfoScreen.routeName);
+                }
+              : null,
         ),
       ),
     );

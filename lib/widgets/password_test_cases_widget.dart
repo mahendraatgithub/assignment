@@ -19,14 +19,20 @@ class PasswordTestCasesWidget extends StatelessWidget {
               )
             : Text(
                 testType,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               ),
         SizedBox(
           height: 8,
         ),
         Text(
           testName,
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+          ),
         ),
       ],
     );
